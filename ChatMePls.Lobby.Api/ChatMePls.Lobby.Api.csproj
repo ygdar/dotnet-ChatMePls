@@ -17,4 +17,8 @@
       <ProjectReference Include="..\ChatMePls.DefaultServices\ChatMePls.DefaultServices.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Marten" Version="7.37.1" />
+    </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{435B2375-658F-45CF-94E8-85D6DAB4315C}"
 	ProjectSection(SolutionItems) = preProject
-		compose.yaml = compose.yaml
+		docker-compose.development.yaml = docker-compose.development.yaml
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject

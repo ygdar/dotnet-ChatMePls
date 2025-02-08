@@ -1,9 +1,11 @@
 ﻿using ChatMePls.Lobby.Api.Enums;
+using Marten.Schema;
 
 namespace ChatMePls.Lobby.Api.Models;
 
 public class DiscussRoom
 {
+    [Identity]
     public Guid Uid { get; set; }
 
     public string Title { get; set; } = null!;

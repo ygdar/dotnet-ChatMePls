@@ -1,3 +1,4 @@
+using Marten;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddMediatR(config =>
     config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddMarten(opts =>
+{
+    opts.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
+}).UseLightweightSessions();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

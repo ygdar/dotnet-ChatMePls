@@ -1,0 +1,17 @@
+﻿services:
+  chatmepls.lobby.db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: chatmepls
+      POSTGRES_PASSWORD: chatmepls
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  
+  chatmepls.lobby.api:
+    image: chatmepls.lobby.api
+    build:
+      context: .
+      dockerfile: ChatMePls.Lobby.Api/Dockerfile

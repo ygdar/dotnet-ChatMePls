@@ -1,6 +1,7 @@
 ﻿using ChatMePls.DefaultServices.CQRS;
 using ChatMePls.Lobby.Api.Enums;
 using ChatMePls.Lobby.Api.Models;
+using Marten;
 
 namespace ChatMePls.Lobby.Api.DiscussRoom.CreateDiscussRoom;
 
@@ -9,9 +10,11 @@ public record InsertDiscussRoomCommand(string Title, string Description, Discuss
 
 public record InsertDiscussRoomResult(Guid Uid);
 
-internal class InsertDiscussRoomCommandHandler : ICommandHandler<InsertDiscussRoomCommand, InsertDiscussRoomResult>
+internal class InsertDiscussRoomCommandHandler(
+    IDocumentSession documentSession)
+    : ICommandHandler<InsertDiscussRoomCommand, InsertDiscussRoomResult>
 {
-    public Task<InsertDiscussRoomResult> Handle(InsertDiscussRoomCommand command, CancellationToken cancellationToken)
+    public async Task<InsertDiscussRoomResult> Handle(InsertDiscussRoomCommand command, CancellationToken cancellationToken)
     {
         var room = new Models.DiscussRoom
         {
@@ -22,6 +25,9 @@ internal class InsertDiscussRoomCommandHandler : ICommandHandler<InsertDiscussRo
             Type = command.RoomType
         };
         
-        return Task.FromResult(new InsertDiscussRoomResult(room.Uid));
+        documentSession.Store(room);
+        await documentSession.SaveChangesAsync(cancellationToken);
+        
+        return new InsertDiscussRoomResult(room.Uid);
     }
 }
