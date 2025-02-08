@@ -1,6 +1,6 @@
 ﻿services:
-  chatmepls.web:
-    image: chatmepls.web
+  chatmepls.lobby.api:
+    image: chatmepls.lobby.api
     build:
       context: .
-      dockerfile: ChatMePls.Web/Dockerfile
+      dockerfile: ChatMePls.Lobby.Api/Dockerfile
