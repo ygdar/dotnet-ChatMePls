@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMePls.Lobby.Api", "Chat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMePls.DefaultServices", "ChatMePls.DefaultServices\ChatMePls.DefaultServices.csproj", "{4646DEEE-E1F2-4286-86F6-1BBBC713B03B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChatMePls.User", "ChatMePls.User", "{0A956C01-AF23-429A-B29A-B605F67E0EE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatMePls.User.Api", "ChatMePls.User.Api\ChatMePls.User.Api.csproj", "{7F03336C-91C4-43F7-B4F2-59396CF6F4FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +30,13 @@ Global
 		{4646DEEE-E1F2-4286-86F6-1BBBC713B03B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4646DEEE-E1F2-4286-86F6-1BBBC713B03B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4646DEEE-E1F2-4286-86F6-1BBBC713B03B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F03336C-91C4-43F7-B4F2-59396CF6F4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F03336C-91C4-43F7-B4F2-59396CF6F4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F03336C-91C4-43F7-B4F2-59396CF6F4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F03336C-91C4-43F7-B4F2-59396CF6F4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2AC167E2-DA35-47FA-912A-B0E30841B723} = {280ED5CA-5655-4AF1-BFB6-5A2B4F0804F3}
+		{7F03336C-91C4-43F7-B4F2-59396CF6F4FD} = {0A956C01-AF23-429A-B29A-B605F67E0EE5}
 	EndGlobalSection
 EndGlobal
