@@ -1,9 +1,8 @@
 ﻿using ChatMePls.DefaultServices.CQRS;
 using ChatMePls.Lobby.Api.Enums;
-using ChatMePls.Lobby.Api.Models;
 using Marten;
 
-namespace ChatMePls.Lobby.Api.DiscussRoom.CreateDiscussRoom;
+namespace ChatMePls.Lobby.Api.Room.CreateRoom;
 
 public record InsertDiscussRoomCommand(string Title, string Description, DiscussRoomType RoomType, DiscussRoomStatus RoomStatus)
     : ICommand<InsertDiscussRoomResult>;
@@ -16,13 +15,11 @@ internal class InsertDiscussRoomCommandHandler(
 {
     public async Task<InsertDiscussRoomResult> Handle(InsertDiscussRoomCommand command, CancellationToken cancellationToken)
     {
-        var room = new Models.DiscussRoom
+        var room = new Models.Room
         {
             Uid = Guid.NewGuid(),
             Title = command.Title,
             Description = command.Description,
-            Status = command.RoomStatus,
-            Type = command.RoomType
         };
         
         documentSession.Store(room);
