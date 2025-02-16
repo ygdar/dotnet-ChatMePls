@@ -9,6 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1"/>
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.5.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.5.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <ProjectReference Include="..\ChatMePls.DefaultServices\ChatMePls.DefaultServices.csproj" />
     </ItemGroup>
 
 </Project>

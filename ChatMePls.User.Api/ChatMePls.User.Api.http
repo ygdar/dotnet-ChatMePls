@@ -1,6 +1,11 @@
-@ChatMePls.User.Api_HostAddress = http://localhost:5205
+@Api_HostAddress = http://localhost:5205
 
-GET {{ChatMePls.User.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{Api_HostAddress}}/UserAuth/AuthUser
+Content-Type: application/json
+
+{
+  "Username": "abc",
+  "Password": "qwe321!"
+}
 
 ###
