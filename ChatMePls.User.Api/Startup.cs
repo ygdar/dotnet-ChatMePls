@@ -51,7 +51,7 @@ public class Startup(IConfiguration config)
                 };
             });
         
-        services.AddIdentityCore<IdentityUser>(o =>
+        services.AddIdentityCore<ApplicationUser>(o =>
             {
                 o.Stores.MaxLengthForKeys = 128;
             })
@@ -86,6 +86,7 @@ public class Startup(IConfiguration config)
         }
 
         app.UseHttpsRedirection();
+        app.UseRouting();
 
         app.UseAuthentication();
         app.UseAuthorization();
