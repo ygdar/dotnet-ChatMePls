@@ -4,6 +4,7 @@ using ChatMePls.User.Api.JwtKey;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ChatMePls.User.Api;
@@ -22,6 +23,10 @@ public class Startup(IConfiguration config)
         
         services.AddMediatR(mediatr =>
             mediatr.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+        services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<UserManager<ApplicationUser>>();
+        services.AddTransient<SignInManager<ApplicationUser>>();
         
         // Add services to the container.
         var symmetricKey = new SigningSymmetricKey("n3EdkTsYujuKYCfyiLy7XfwA4RoergFLZ5NuXCCZ");
@@ -40,13 +45,13 @@ public class Startup(IConfiguration config)
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = symmetricKey.GetKey(),
         
-                    ValidateIssuer = true,
-                    ValidIssuer = config.GetValue<string>("Jwt:Issuer"),
+                    ValidateIssuer = false,
+                    ValidIssuer = GetType().Assembly.GetName().Name,
         
-                    ValidateAudience = true,
-                    ValidAudience = config.GetValue<string>("Jwt:Audience"),
+                    ValidateAudience = false,
+                    ValidAudience = "Client", // config.GetValue<string>("Jwt:Audience"),
         
-                    ValidateLifetime = true,
+                    ValidateLifetime = false,
                     ClockSkew = TimeSpan.FromSeconds(5),
                 };
             });

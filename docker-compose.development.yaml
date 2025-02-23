@@ -1,5 +1,5 @@
 ﻿services:
-  chatmepls.lobby.db:
+  chatmepls.pg.db:
     image: postgres:latest
     restart: always
     environment:
@@ -10,8 +10,8 @@
     volumes:
       - ./pgdata:/var/lib/postgresql/data
   
-  chatmepls.lobby.api:
-    image: chatmepls.lobby.api
+  chatmepls.user.api:
+    image: chatmepls.user.api
     build:
       context: .
-      dockerfile: ChatMePls.Lobby.Api/Dockerfile
+      dockerfile: ChatMePls.User.Api/Dockerfile

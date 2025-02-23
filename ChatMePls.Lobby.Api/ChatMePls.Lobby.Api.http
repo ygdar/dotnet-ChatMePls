@@ -1,6 +1,0 @@
-@ChatMePls.Lobby.Api_HostAddress = http://localhost:5001
-
-GET {{ChatMePls.Lobby.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
