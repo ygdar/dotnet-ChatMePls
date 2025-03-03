@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using ChatMePls.User.Api.Application;
 using ChatMePls.User.Api.JwtKey;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -20,23 +21,20 @@ public class Startup(IConfiguration config)
                     config.GetConnectionString("DefaultConnection"),
                     o => o.MigrationsAssembly(typeof(Startup).Assembly.FullName));
             });
-        
-        services.AddMediatR(mediatr =>
-            mediatr.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<UserManager<ApplicationUser>>();
         services.AddTransient<SignInManager<ApplicationUser>>();
         
         // Add services to the container.
-        var symmetricKey = new SigningSymmetricKey("n3EdkTsYujuKYCfyiLy7XfwA4RoergFLZ5NuXCCZ");
+        var symmetricKey = new SigningSymmetricKey(config["Jwt:SigningSymmetricKey"]);
 
         services.AddTransient<IJwtSigningEncodingKey>(_ => symmetricKey);
         services.AddTransient<JwtSecurityTokenHandler>();
         services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = "JwtBearer";
-                options.DefaultChallengeScheme = "JwtBearer";
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(jwtBearerOptions =>
             {
@@ -46,10 +44,10 @@ public class Startup(IConfiguration config)
                     IssuerSigningKey = symmetricKey.GetKey(),
         
                     ValidateIssuer = false,
-                    ValidIssuer = GetType().Assembly.GetName().Name,
+                    // ValidIssuer = GetType().Assembly.GetName().Name,
         
                     ValidateAudience = false,
-                    ValidAudience = "Client", // config.GetValue<string>("Jwt:Audience"),
+                    // ValidAudience = "Client", // config.GetValue<string>("Jwt:Audience"),
         
                     ValidateLifetime = false,
                     ClockSkew = TimeSpan.FromSeconds(5),
@@ -62,6 +60,7 @@ public class Startup(IConfiguration config)
             })
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
         services.Configure<IdentityOptions>(io =>
         {
             io.Password.RequireDigit = false;
@@ -90,7 +89,6 @@ public class Startup(IConfiguration config)
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
         app.UseRouting();
 
         app.UseAuthentication();

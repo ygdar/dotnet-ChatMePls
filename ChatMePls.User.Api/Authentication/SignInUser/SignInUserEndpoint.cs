@@ -13,14 +13,13 @@ public record SignInUserRequest([Required] string UserName, [Required] string Pa
 
 public record SignInUserResponse(string token);
 
-[ApiController]
+[ApiController, AllowAnonymous]
 [Route("[controller]")]
 public class SignInUserEndpoint(ISender sender)
     : ControllerBase
 {
     [HttpPost]
-    [AllowAnonymous]
-    public async Task<IActionResult> AuthUser(SignInUserRequest request)
+    public async Task<IActionResult> SignInUser(SignInUserRequest request)
     {
         if (!ModelState.IsValid)
         {

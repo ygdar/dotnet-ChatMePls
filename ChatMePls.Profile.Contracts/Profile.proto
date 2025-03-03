@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "ChatMePls.Profile.Contracts";
+
+service ProfileEndpoint
+{
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc GetToken (GetTokenRequest) returns (GetTokenResponse);
+}
+
+message CreateUserRequest
+{
+  string UserName = 1;
+  string Email = 2;
+  string Password = 3;
+}
+
+message CreateUserResponse
+{
+  bool Success = 1;
+  repeated string Errors = 2;
+}
+
+message GetTokenRequest
+{
+  string UserName = 1;
+  string Password = 2;
+}
+
+message GetTokenResponse
+{
+  string Token = 1;
+}

@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ChatMePls.DefaultServices\ChatMePls.DefaultServices.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf
+                Include="./../ChatMePls.Profile.Contracts/*.proto"
+                OutputDir="%(RelativePath)Contracts/"
+                GrpcServices="Client"
+        />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.64.0"/>
+        <PackageReference Include="Google.Protobuf" Version="3.29.3" />
+        <PackageReference Include="Grpc.Tools" Version="2.70.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contracts\" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+@ChatMePls.Gateway_HostAddress = http://localhost:5048
+
+GET {{ChatMePls.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
